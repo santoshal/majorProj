@@ -1,0 +1,214 @@
+<button (click)="quizlist()">get</button>
+<div>
+  <h4>MaxScorer</h4>
+
+  <label
+    ><strong>Name: {{ userName }}</strong></label
+  >
+  <li class="list-group-item">
+    {{ maxScorer }}
+  </li>
+</div>
+
+<div class="container">
+  <p>Time Remaining:{{ hr }}:{{ min }}:{{ sec }}</p>
+  <div>
+    <h2 class="fav1">Questions</h2>
+    <button class="fav2" mat-icon-button (click)="toggleSelected()">
+      <mat-icon
+        *ngIf="selected"
+        aria-label="Example icon-button with a heart icon"
+      >
+        favorite
+      </mat-icon>
+      <mat-icon
+        *ngIf="!selected"
+        aria-label="Example icon-button with a heart icon"
+      >
+        favorite_border
+      </mat-icon>
+    </button>
+  </div>
+  <br /><br /><br />
+
+  <ul class="list-group" *ngFor="let question of ques; let i = index">
+    <li class="list-group-item" *ngIf="question.status && question.typeId == 1">
+      <div>
+        <label
+          ><p type="text">{{ i + 1 }}. {{ question.questions }}</p></label
+        >
+      </div>
+      <div class="radio">
+        <label
+          ><input
+            type="radio"
+            [checked]="question.userAns == question.option1"
+            value="1"
+            name="optradio{{ i }}"
+            disabled
+          />{{ question.option1 }}</label
+        >
+      </div>
+      <div class="radio">
+        <label
+          ><input
+            type="radio"
+            [checked]="question.userAns == question.option2"
+            value="2"
+            name="optradio{{ i }}"
+            disabled
+          />{{ question.option2 }}</label
+        >
+      </div>
+      <div class="radio">
+        <label
+          ><input
+            type="radio"
+            [checked]="question.userAns == question.option3"
+            value="3"
+            name="optradio{{ i }}"
+            disabled
+          />{{ question.option3 }}</label
+        >
+      </div>
+      <div class="radio">
+        <label
+          ><input
+            type="radio"
+            [checked]="question.userAns == question.option4"
+            value="4"
+            name="optradio{{ i }}"
+            disabled
+          />{{ question.option4 }}</label
+        >
+      </div>
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="!question.status && question.typeId == 1"
+      style="color: blue"
+    >
+      <div>
+        <label
+          ><p type="text">{{ i + 1 }}. {{ question.questions }}</p></label
+        >
+      </div>
+      <div class="radio">
+        <label id="{{ qid }}{{ question.id }}11"
+          ><input
+            type="radio"
+            id="{{ qid }}{{ question.id }}1"
+            value="1"
+            name="optradio{{ i }}"
+            (click)="
+              setAnswer(
+                question.option1,
+                question.id,
+                question.answer,
+                question
+              )
+            "
+          />{{ question.option1 }}</label
+        >
+      </div>
+      <div class="radio">
+        <label id="{{ qid }}{{ question.id }}22"
+          ><input
+            type="radio"
+            id="{{ qid }}{{ question.id }}2"
+            value="2"
+            name="optradio{{ i }}"
+            (click)="
+              setAnswer(
+                question.option2,
+                question.id,
+                question.answer,
+                question
+              )
+            "
+          />{{ question.option2 }}</label
+        >
+      </div>
+      <div class="radio">
+        <label id="{{ qid }}{{ question.id }}33"
+          ><input
+            type="radio"
+            id="{{ qid }}{{ question.id }}3"
+            value="3"
+            name="optradio{{ i }}"
+            (click)="
+              setAnswer(
+                question.option3,
+                question.id,
+                question.answer,
+                question
+              )
+            "
+          />{{ question.option3 }}</label
+        >
+      </div>
+      <div class="radio">
+        <label id="{{ qid }}{{ question.id }}44">
+          <input
+            type="radio"
+            id="{{ qid }}{{ question.id }}4"
+            value="3"
+            name="optradio{{ i }}"
+            (click)="
+              setAnswer(
+                question.option4,
+                question.id,
+                question.answer,
+                question
+              )
+            "
+          />{{ question.option4 }}</label
+        >
+      </div>
+    </li>
+    <li class="list-group-item" *ngIf="question.status && question.typeId == 2">
+      <div>
+        <label
+          ><p type="text">{{ i + 1 }}. {{ question.questions }}</p></label
+        >
+      </div>
+      <div>
+        <label
+          ><input type="text" disabled value="{{ question.userAns }}"
+        /></label>
+      </div>
+      <div>
+        <label>Correct Answer:{{ question.answer }}</label>
+      </div>
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="!question.status && question.typeId == 2"
+      style="color: blue"
+    >
+      <div>
+        <label
+          ><p type="text">{{ i + 1 }}. {{ question.questions }}</p></label
+        >
+      </div>
+      <div>
+        <input
+          type="text"
+          (blur)="onblurdesc(question.id, question.answer, $event)"
+        />
+        <!-- <div>
+          <span *ngIf="disable"> Correct Answer:{{ question.answer }}</span>
+        </div> -->
+      </div>
+    </li>
+  </ul>
+
+  <button type="button" class="btn btn-success" (click)="submitQuiz()">
+    Submit
+  </button>
+
+  <!-- <div>
+   <h4> Your Score is: {{score}}</h4>
+  </div> -->
+  <!-- <h1>{{counter}}</h1> -->
+</div>

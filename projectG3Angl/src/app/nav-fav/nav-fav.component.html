@@ -1,0 +1,27 @@
+<p>nav-fav works!</p>
+
+<button (click)="getFavList()">Favourite</button>
+
+<div>
+
+   <ul>
+    <li *ngFor="let a of myfavlist">
+        <b> {{a.quizs && a.quizs.quizname}} </b>           
+     </li>
+   </ul>
+</div>
+
+
+<div class="container">
+   <h2>Cards Columns</h2>
+
+   <div class="card-columns" *ngFor="let a of myfavlist" >
+     <div class="card bg-primary">
+       <div class="card-body text-center">
+         <p class="card-text">{{a.quizs && a.quizs.quizname}} </p>
+         <button (click)="removeFav(a.quizeId)">Remove</button>
+       </div>
+     </div>
+   </div>
+
+</div>

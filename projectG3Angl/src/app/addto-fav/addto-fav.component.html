@@ -1,0 +1,32 @@
+<p>addto-fav works!</p>
+<!-- <button mat-icon-button (click)="toggleSelected()">
+    <mat-icon
+    *ngIf="selected"
+    aria-label="Example icon-button with a heart icon">
+    favorite
+  </mat-icon>
+  <mat-icon
+  *ngIf="!selected"
+  aria-label="Example icon-button with a heart icon">
+  favorite_border
+</mat-icon>
+
+</button> -->
+<button (click)="showQuize()">Show </button>
+
+<div *ngFor="let quiz of quizess ; let i = index">
+   <p>{{quiz.quizname}}</p>
+   <button mat-icon-button   (click)="toggleSelected(quiz.id,i,quiz.status)">
+    <mat-icon
+    *ngIf="quiz.status"
+    aria-label="Example icon-button with a heart icon">
+    favorite
+  </mat-icon>
+  <mat-icon
+  *ngIf="!quiz.status"
+  aria-label="Example icon-button with a heart icon">
+  favorite_border
+</mat-icon>
+
+</button>
+</div>
